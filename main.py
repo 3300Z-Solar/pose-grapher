@@ -4,15 +4,14 @@ import matplotlib.pyplot as plt
 
 
 def main():
-    path = sys.argv[1] if len(sys.argv) > 1 else "-"
-    if path == "-":
-        f = sys.stdin
-    else:
+    path = sys.argv[1] if len(sys.argv) > 1 else None
+    if path:
         f = open(path)
+    else:
+        quit()
 
     records = [json.loads(line) for line in f if line.strip()]
-    if path != "-":
-        f.close()
+    f.close()
 
     t = [r["t"] for r in records]
     x = [r["pose"]["x"] for r in records]
